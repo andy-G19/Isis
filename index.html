@@ -15,7 +15,7 @@
     html, body {
       height: 100%;
       font-family: 'Great Vibes', cursive;
-      background: linear-gradient(135deg, #ffc0cb, #ffe4e1);
+      /*background: linear-gradient(135deg, #ffc0cb, #ffe4e1);*/
       overflow: hidden;
     }
 
@@ -139,13 +139,91 @@
       }
     }
 
+    /*margaritas*/
+    .daisy {
+      position: absolute;
+      width: 20px;
+      height: 20px; 
+      background: transparent;
+      border-radius:  50%;
+      z-index: 1;
+      animation: floatDaisy 10s infinite ease-in;
+    }
+
+    .daisy-center {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      left: 5px;
+      top: 8px;
+      background: yellow;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .daisy-petal {
+    position: absolute;
+    width: 6px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+    left: 7px;
+    top: 0;
+    transform-origin: 3px 14px;
+    }
+    .daisy-petal:nth-child(2) { transform: rotate(45deg); }
+    .daisy-petal:nth-child(3) { transform: rotate(90deg); }
+    .daisy-petal:nth-child(4) { transform: rotate(135deg); }
+    .daisy-petal:nth-child(5) { transform: rotate(180deg); }
+    .daisy-petal:nth-child(6) { transform: rotate(225deg); }
+    .daisy-petal:nth-child(7) { transform: rotate(270deg); }
+    .daisy-petal:nth-child(8) { transform: rotate(315deg); }
+
+    @keyframes floatDaisy {
+      0% {
+      transform: translateY(100vh) scale(1);
+      opacity: 0.8;
+      }
+      100% {
+      transform: translateY(-10vh) scale(1.2);
+      opacity: 0.2;
+      }
+    }
+
+    video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.5; /* Ajusta la opacidad si lo deseas */
+    pointer-events: none;
+  }
+
     audio {
       display: none;;
     }
   </style>
 </head>
 <body>
-
+  <video muted autoplay loop>
+    <source src="Video de WhatsApp 2025-01-07 a las 09.23.13_e3a314c9.mp4" type="video/mp4">
+  </video>
+  <div class="daisy">
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-petal"></div>
+  <div class="daisy-center"></div>
+  </div>
   <!-- Páginas -->
   <div class="page active" id="page1">
     <h1>Hola mi amor Isis💌</h1>
@@ -211,6 +289,30 @@
       star.style.top = Math.random() * 100 + 'vh';
       document.body.appendChild(star);
     }
+    
+    // Margaritas flotantes
+   const totalDaisies = 20;
+    for (let i = 0; i < totalDaisies; i++) {
+    const daisy = document.createElement('div');
+    daisy.className = 'daisy';
+    daisy.style.left = Math.random() * 100 + 'vw';
+    daisy.style.animationDuration = (10 + Math.random() * 8) + 's';
+    daisy.style.opacity = 0.5 + Math.random() * 0.5;
+    daisy.style.top = Math.random() * 100 + 'vh';
+
+    // Crear pétalos
+    for (let j = 0; j < 8; j++) {
+      const petal = document.createElement('div');
+      petal.className = 'daisy-petal';
+      daisy.appendChild(petal);
+    }
+    // Crear centro
+    const center = document.createElement('div');
+    center.className = 'daisy-center';
+    daisy.appendChild(center);
+
+    document.body.appendChild(daisy);
+      }
   
 
     // Navegación entre páginas
