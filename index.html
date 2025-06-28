@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> 
+<html lang="es"> 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para Mi Amor 💖</title>
+  <title>💖 Para Mi Amor ISIS 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     * {
@@ -106,8 +106,41 @@
       }
     }
 
+    /*estrellas*/
+    .star {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: rgb(4, 54, 219);
+      clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+    opacity: 0.7;
+    animation: floatStar 12s infinite linear;
+    }
+
+    @keyframes floatStar {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.7;
+      }
+      100%{
+        transform: translateY(-10vh) scale(1.20);
+        opacity: 0.2;
+      }
+    }
+
     audio {
-      display: none;
+      display: none;;
     }
   </style>
 </head>
@@ -115,7 +148,7 @@
 
   <!-- Páginas -->
   <div class="page active" id="page1">
-    <h1>Hola mi amor 💌</h1>
+    <h1>Hola mi amor Isis💌</h1>
     <p>Hoy quiero regalarte algo especial… una pequeña carta hecha con todo mi corazón, solo para ti.</p>
     <button onclick="nextPage()">Ver más</button>
   </div>
@@ -129,18 +162,35 @@
   <div class="page" id="page3">
     <h1>Siempre juntos 💘</h1>
     <p>Prometo cuidarte, respetarte y hacerte sentir amada todos los días de nuestras vidas. Eres mi todo.</p>
-    <button onclick="nextPage()">Última</button>
+    <button onclick="nextPage()">Aun hay mas</button>
   </div>
 
   <div class="page" id="page4">
     <h1>Te amo 💞</h1>
     <p>Y siempre te amaré, más allá del tiempo y de la vida. Gracias por ser tú.</p>
+    <button onclick="nextPage()">La ultimita</button>
+  </div>
+
+  <div class="page" id="page5">
+    <h1>¡Feliz cumpleaños! 🎂🎉</h1>
+    <p>Hoy celebramos tu vida, tu alegría y todo lo hermoso que eres. ¡Te deseo el mejor de los días, mi amor!</p>
     <button onclick="restart()">Volver a leer</button>
   </div>
 
+  <audio id="musica" src="Noelia - Tu.mp3" autoplay loop muted></audio>
   <!-- Corazones flotantes -->
+
   <script>
-    const totalHearts = 35;
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('musica');
+      audio.muted = false;
+      audio.play().catch(() => {
+    // Si el navegador bloquea el autoplay, se activará al primer clic
+    });
+    });
+
+    //corazones flotantes
+    const totalHearts = 100;
     for (let i = 0; i < totalHearts; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -150,11 +200,30 @@
       document.body.appendChild(heart);
     }
 
+     // Estrellas flotantes
+    const totalStars = 100;
+    for (let i = 0; i < totalStars; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (8 + Math.random() * 8) + 's';
+      star.style.opacity = 0.3 + Math.random() * 0.7;
+      star.style.top = Math.random() * 100 + 'vh';
+      document.body.appendChild(star);
+    }
+  
+
     // Navegación entre páginas
     let currentPage = 1;
+    const totalPages = 5; // Cambia este valor a 5
+
     function nextPage() {
+      const audio = document.getElementById('musica');
+      if(audio&&audio.paused) audio.play();
+    
       document.getElementById(`page${currentPage}`).classList.remove('active');
       currentPage++;
+      if (currentPage > totalPages) currentPage = 1;
       document.getElementById(`page${currentPage}`).classList.add('active');
     }
 
